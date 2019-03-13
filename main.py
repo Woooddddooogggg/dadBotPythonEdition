@@ -6,17 +6,8 @@ import flask
 import utils
 import ffmpeg
 import asyncio
-#import firebase_admin
-#from google.cloud import storage
-#from firebase_admin import credentials
-#from firebase_admin import storage
-#add these vvv when doing firebase
-#firebase_admin
-#google-cloud==0.34.0
 from keep_alive import keep_alive
 
-#cred = credentials.Certificate(json.loads(os.environ.get("firebaseAuth")))
-#firebase_admin.initialize_app(cred,{"storageBucket":"dadbot-a840b.appspot.com"})
 client = discord.Client()
 
 swansonQuoteKey = "swansong"
@@ -30,10 +21,7 @@ caveKey = "playcave"
 memekey = "!meme"
 airhornKey = "!airhorn"
 cenaKey = "!cena"
-#stopAllAudio = "execute order 66"
 testStopKey = "start"
-
-#can I do pings to servers?
 
 @client.event
 async def on_ready():
@@ -89,9 +77,7 @@ client.run(token)
 
 '''
 NEXT UP:
-get git functionality up and running
 let user send sound requests to dadbot directly
-#kill me and the women and the children
 fix "try/except" in makeLemonade
 Add time spent functionality
 Add play with me/play with x functionality to change status/game
