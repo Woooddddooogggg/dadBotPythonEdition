@@ -86,9 +86,10 @@ async def makeLemonade(client, message, dirOrFile):
     return reaction.emoji == u"\u23F9"
     
   try:
-    reaction, user = await client.wait_for('reaction_add', timeout=5, check=lookForStopRequest)
+    reaction, user = await client.wait_for('reaction_add', check=lookForStopRequest)
   except asyncio.TimeoutError:
-    await message.channel.send('👎')
+    #await message.channel.send('👎')
+    print(f"No Cancellation")
   else:
     await voiceChannel.disconnect()
 
@@ -113,3 +114,18 @@ def getChannelToSend(message):
         #thiis except is doing nothing
     except Exception as e:
       message.channel.send(f"Hey, uhhh hi")
+
+async def setDadGame(message, client):
+  potentialMemberId = re.search("(<@349722474365190144> play with )(<@(\d*)>)", message.content)
+  childAsMember = None
+  if re.search("(<@349722474365190144> play with )(me)", message.content):
+    childAsMember = message.author
+  elif potentialMemberId:
+    childAsMember = discord.utils.get(message.guild.members, id = int(potentialMemberId.group(3))) 
+  else:
+    await message.channel.send("That's not my kid. Make sure to use @mention or 'me'")
+  if childAsMember is not None:
+    if str(childAsMember.status).lower() == "online" or childAsMember.status == "idle":
+      await client.change_presence(activity=discord.Game(f"with {childAsMember.display_name}"))
+    else:
+      await message.channel.send("I'm not waking the kids up. (they're not online)")

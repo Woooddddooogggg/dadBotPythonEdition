@@ -21,12 +21,11 @@ caveKey = "playcave"
 memekey = "!meme"
 airhornKey = "!airhorn"
 cenaKey = "!cena"
-testStopKey = "start"
+playWithKey = "<@349722474365190144> play with "
 
 @client.event
 async def on_ready():
-  game = discord.Game("Daddy's Home")
-  await client.change_presence(activity=game)
+  await client.change_presence(activity=discord.Game("Daddy's Home"))
   for guild in client.guilds:
     member = guild.get_member(349722474365190144)
     if member.voice is not None:
@@ -45,7 +44,7 @@ async def on_message(message):
     if needAdultKey in cleanMessage:
       await message.channel.send("Adults are just as lost as you are. Have faith in yourself and what you can do.")
     if helpKey in cleanMessage:
-      await message.channel.send(f"Available commands are: '!meme', '!airhorn', '!cena', 'playcave', '!rtd,'!rtd lower,upper', '/roll xdn', 'swansong', 'help'\nYou can stop audio playback by adding the :stop_button: reaction")
+      await message.channel.send(f"Available commands are: 'play with @mention or me', !meme', '!airhorn', '!cena', 'playcave', '!rtd,'!rtd lower,upper', '/roll xdn', 'swansong', 'help'\nYou can stop audio playback by adding the :stop_button: reaction")
       #NOTE you can probably use a dictionary for this so you don't have to manually update the known commands every time
     if rtdKey in cleanMessage:
       await message.channel.send(await utils.rollTheDice(cleanMessage))
@@ -64,12 +63,14 @@ async def on_message(message):
       asyncio.create_task(utils.makeLemonade(client, message, "C:\\Users\\Wooody\\Documents\\Development\\dadBotPython\\audioSources\\memes\\mlg-airhorn.mp3"))
     if cenaKey in cleanMessage:
       asyncio.create_task(utils.makeLemonade(client, message, "C:\\Users\\Wooody\\Documents\\Development\\dadBotPython\\audioSources\\memes\\JOHN CENA.mp3"))
+    if playWithKey in cleanMessage:
+      asyncio.create_task(utils.setDadGame(message, client))
 
-'''
 @client.event
-async def on_reaction_add(reaction, user):
-'''
-
+async def on_member_update(before, after):
+  status = str(after.status).lower()
+  if after.display_name in str(discord.utils.get(client.get_all_members(), name = client.user.name).activity) and (status is not "online" or status is not "idle"):
+    await client.change_presence(activity=discord.Game("Daddy's Home"))
 
 
 token = os.environ.get("dadToken")
@@ -80,6 +81,5 @@ NEXT UP:
 let user send sound requests to dadbot directly
 fix "try/except" in makeLemonade
 Add time spent functionality
-Add play with me/play with x functionality to change status/game
 dont let "him" trigger dadjoke even though it ends with "im"
 '''
