@@ -72,14 +72,15 @@ async def on_member_update(before, after):
   if after.display_name in str(discord.utils.get(client.get_all_members(), name = client.user.name).activity) and (status is not "online" or status is not "idle"):
     await client.change_presence(activity=discord.Game("Daddy's Home"))
 
-
-token = os.environ.get("dadToken")
+print(os.environ)
+token = os.environ.get("DADTOKEN")
+print(token[-4:])
 client.run(token)
 
 '''
 NEXT UP:
-let user send sound requests to dadbot directly
+dafuq is up with cave not disconeccting quicklly (the thread is waiting due to no timeout)
 fix "try/except" in makeLemonade
 Add time spent functionality
-dont let "him" trigger dadjoke even though it ends with "im"
+Scrabble dictionary? (e.g. return top 10 when given letters)
 '''

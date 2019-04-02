@@ -86,7 +86,7 @@ async def makeLemonade(client, message, dirOrFile):
     return reaction.emoji == u"\u23F9"
     
   try:
-    reaction, user = await client.wait_for('reaction_add', check=lookForStopRequest)
+    reaction, user = await client.wait_for('reaction_add', timeout=5, check=lookForStopRequest)
   except asyncio.TimeoutError:
     #await message.channel.send('👎')
     print(f"No Cancellation")
