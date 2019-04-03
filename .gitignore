@@ -3,6 +3,5 @@ dadBotWorkspace.code-workspace
 keep_alive.py
 .vscode
 __pycache__
-audiosources
 ffmpeg-20190308-147ef1d-win64-static
 .gitignore
