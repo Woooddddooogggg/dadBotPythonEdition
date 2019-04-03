@@ -6,7 +6,6 @@ import flask
 import utils
 import ffmpeg
 import asyncio
-from keep_alive import keep_alive
 
 client = discord.Client()
 
@@ -35,6 +34,8 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+  print(os.path)
+  print(os.path.dirname(os.path.abspath('main.py')))
   cleanMessage = message.content.lower()
   if message.author != client.user:
     if swansonQuoteKey in cleanMessage:
@@ -56,13 +57,13 @@ async def on_message(message):
       for item in rolls:
         await message.channel.send(rolls[item])
     if caveKey in cleanMessage:
-      asyncio.create_task(utils.makeLemonade(client, message, "C:\\Users\\Wooody\\Documents\\Development\\dadBotPython\\audioSources\\caveQuotes\\"))
+      asyncio.create_task(utils.makeLemonade(client, message, f"{os.path.dirname(os.path.abspath('main.py'))}\\audioSources\\caveQuotes\\"))
     if memekey in cleanMessage:
-      asyncio.create_task(utils.makeLemonade(client, message, "C:\\Users\\Wooody\\Documents\\Development\\dadBotPython\\audioSources\\memes\\"))
+      asyncio.create_task(utils.makeLemonade(client, message, f"{os.path.dirname(os.path.abspath('main.py'))}\\audioSources\\memes\\"))
     if airhornKey in cleanMessage:
-      asyncio.create_task(utils.makeLemonade(client, message, "C:\\Users\\Wooody\\Documents\\Development\\dadBotPython\\audioSources\\memes\\mlg-airhorn.mp3"))
+      asyncio.create_task(utils.makeLemonade(client, message, f"{os.path.dirname(os.path.abspath('main.py'))}\\audioSources\\memes\\mlg-airhorn.mp3"))
     if cenaKey in cleanMessage:
-      asyncio.create_task(utils.makeLemonade(client, message, "C:\\Users\\Wooody\\Documents\\Development\\dadBotPython\\audioSources\\memes\\JOHN CENA.mp3"))
+      asyncio.create_task(utils.makeLemonade(client, message, f"{os.path.dirname(os.path.abspath('main.py'))}\\audioSources\\memes\\JOHN CENA.mp3"))
     if playWithKey in cleanMessage:
       asyncio.create_task(utils.setDadGame(message, client))
 
@@ -72,9 +73,7 @@ async def on_member_update(before, after):
   if after.display_name in str(discord.utils.get(client.get_all_members(), name = client.user.name).activity) and (status is not "online" or status is not "idle"):
     await client.change_presence(activity=discord.Game("Daddy's Home"))
 
-print(os.environ)
 token = os.environ.get("DADTOKEN")
-print(token[-4:])
 client.run(token)
 
 '''

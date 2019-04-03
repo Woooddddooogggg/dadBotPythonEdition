@@ -4,4 +4,5 @@ keep_alive.py
 .vscode
 __pycache__
 ffmpeg-20190308-147ef1d-win64-static
+ffmpeg-20190402-6aeaac3-win64-static
 .gitignore
