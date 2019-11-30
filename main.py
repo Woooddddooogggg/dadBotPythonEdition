@@ -34,8 +34,6 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-  print(os.path)
-  print(os.path.dirname(os.path.abspath('main.py')))
   cleanMessage = message.content.lower()
   if message.author != client.user:
     if swansonQuoteKey in cleanMessage:
@@ -57,6 +55,7 @@ async def on_message(message):
       for item in rolls:
         await message.channel.send(rolls[item])
     if caveKey in cleanMessage:
+      print(discord.opus.is_loaded())
       asyncio.create_task(utils.makeLemonade(client, message, f"{os.path.dirname(os.path.abspath('main.py'))}\\audioSources\\caveQuotes\\"))
     if memekey in cleanMessage:
       asyncio.create_task(utils.makeLemonade(client, message, f"{os.path.dirname(os.path.abspath('main.py'))}\\audioSources\\memes\\"))

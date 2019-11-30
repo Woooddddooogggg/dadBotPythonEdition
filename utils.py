@@ -24,9 +24,6 @@ async def timeSpent(message):
   #this does nothing right now
   try:
     response = requests.get("https://wol.gg/stats/na/doctordinosaur/")
-    print(response.status_code)
-    print(response.json())
-    print(json.loads(response.content)[0])
   except Exception as e:
     print(e)
 
@@ -77,12 +74,13 @@ async def rollSpecifiedDice(message):
         return rollSummary
 
 async def makeLemonade(client, message, dirOrFile):
-  source = dirOrFile if os.path.isfile(dirOrFile) else f"{dirOrFile}{random.choice(os.listdir(dirOrFile))}"
+  sourcePath = dirOrFile if os.path.isfile(dirOrFile) else f"{dirOrFile}{random.choice(os.listdir(dirOrFile))}"
+  print(f"Soure Path: {sourcePath}")
+  audio_source = discord.FFmpegPCMAudio(sourcePath)
   voiceChannel = await getChannelToSend(message).connect()
-  voiceChannel.play(discord.FFmpegPCMAudio(source), after=lambda e: print('done', e))
+  voiceChannel.play(audio_source, after=lambda e: print('done', e))
 
   def lookForStopRequest(reaction, user):
-    print("hello there")
     return reaction.emoji == u"\u23F9"
     
   try:
