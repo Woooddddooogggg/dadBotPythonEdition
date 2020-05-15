@@ -1,8 +1,6 @@
 import sys
 import os
 import discord
-import simplejson as json
-import flask
 import utils
 import ffmpeg
 import asyncio
@@ -56,13 +54,13 @@ async def on_message(message):
         await message.channel.send(rolls[item])
     if caveKey in cleanMessage:
       print(discord.opus.is_loaded())
-      asyncio.create_task(utils.makeLemonade(client, message, f"{os.path.dirname(os.path.abspath('main.py'))}\\audioSources\\caveQuotes\\"))
+      asyncio.create_task(utils.makeLemonade(client, message, f"{os.path.dirname(os.path.abspath('main.py'))}/audioSources/caveQuotes/"))
     if memekey in cleanMessage:
-      asyncio.create_task(utils.makeLemonade(client, message, f"{os.path.dirname(os.path.abspath('main.py'))}\\audioSources\\memes\\"))
+      asyncio.create_task(utils.makeLemonade(client, message, f"{os.path.dirname(os.path.abspath('main.py'))}/audioSources/memes/"))
     if airhornKey in cleanMessage:
-      asyncio.create_task(utils.makeLemonade(client, message, f"{os.path.dirname(os.path.abspath('main.py'))}\\audioSources\\memes\\mlg-airhorn.mp3"))
+      asyncio.create_task(utils.makeLemonade(client, message, f"{os.path.dirname(os.path.abspath('main.py'))}/audioSources/memes/mlg-airhorn.mp3"))
     if cenaKey in cleanMessage:
-      asyncio.create_task(utils.makeLemonade(client, message, f"{os.path.dirname(os.path.abspath('main.py'))}\\audioSources\\memes\\JOHN CENA.mp3"))
+      asyncio.create_task(utils.makeLemonade(client, message, f"{os.path.dirname(os.path.abspath('main.py'))}/audioSources/memes/JOHN CENA.mp3"))
     if playWithKey in cleanMessage:
       asyncio.create_task(utils.setDadGame(message, client))
 

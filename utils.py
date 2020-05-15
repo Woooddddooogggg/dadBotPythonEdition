@@ -74,6 +74,9 @@ async def rollSpecifiedDice(message):
         return rollSummary
 
 async def makeLemonade(client, message, dirOrFile):
+  print(message)
+  print(message.author)
+  print(message.content.lower())
   sourcePath = dirOrFile if os.path.isfile(dirOrFile) else f"{dirOrFile}{random.choice(os.listdir(dirOrFile))}"
   print(f"Soure Path: {sourcePath}")
   audio_source = discord.FFmpegPCMAudio(sourcePath)
